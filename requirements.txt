@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 fastapi[all]
+=======
+fastapi
+uvicorn
+sqlalchemy
+passlib
+bcrypt
+>>>>>>> f1b6870 (Initial Commit)
