@@ -2,16 +2,27 @@ from pydantic import BaseModel
 
 from typing import List 
 
+from typing import Optional
 
-class Blog(BaseModel):
+
+class BlogBase(BaseModel):
     
     title:str
     
     body:str 
     
+    # user_id:int
+    
+    
+        
+        
+        
+class Blog(BlogBase):
+    
     class Config():
         
-        orm_mode = True
+        from_attributes = True
+        
 
 
 class User(BaseModel):
@@ -22,19 +33,21 @@ class User(BaseModel):
     
     password:str
 
-
-
+    class Config():
+        
+        from_attributes = True
+        
 class ShowUser(BaseModel):
     
     name:str
     
     email:str
-    
+
     blogs : List[Blog] = []
     
     class Config():
         
-        orm_mode = True
+        from_attributes = True
         
 
 class ShowBlog(BaseModel):
@@ -43,9 +56,28 @@ class ShowBlog(BaseModel):
     
     body:str
     
-    creator : ShowUser
+    creator : Optional[ShowUser]
     
     class Config():
         
-        orm_mode = True
+        from_attributes = True
         
+        
+class Login(BaseModel):
+    
+    username:str
+    
+    password:str
+    
+
+class Token(BaseModel):
+    
+    access_token: str
+    
+    token_type: str
+
+
+class TokenData(BaseModel):
+    
+    email: str | None = None
+    id:Optional[int]=None
